@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/robospice-1.4.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/robospice-cache-1.4.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/robospice-google-http-client-1.4.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/robospice-okhttp-1.4.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/robospice-ormlite-1.4.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/robospice-retrofit-1.4.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/gson-2.2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/Robospice/retrofit-1.2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/apt-connexus-master new/apt-connexus-master/web-api-test/httpcore-4.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/apt-connexus-master new/apt-connexus-master/web-api-test/guava-15.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="I:/Work/Mobile/workspace/Connexus/libs/google-api-client-android-1.16.0-rc.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
