@@ -16,9 +16,18 @@
 
 package com.example.android.bitmapfun.ui;
 
+import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import org.apache.http.entity.StringEntity;
+
 import com.example.android.bitmapfun.BuildConfig;
 import com.example.android.bitmapfun.util.Utils;
 import com.google.android.gms.common.AccountPicker;
+import com.google.gson.Gson;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
@@ -34,7 +43,8 @@ import android.widget.Toast;
  */
 public class ImageGridActivity extends SpiceBaseActivity {
     private static final String TAG = "ImageGridActivity";
-    private RequestAllStreams mRequest;
+    //private RequestAllStreams mRequest;
+    private RequestSelectStreams mRequest;
     static final int REQUEST_ACCOUNT_PICKER = 2;
     
     @Override
@@ -44,9 +54,17 @@ public class ImageGridActivity extends SpiceBaseActivity {
         }
         super.onCreate(savedInstanceState);
 
-        mRequest = new RequestAllStreams();
-        //Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{"com.google"},         
-        //		true, null, null, null, null); startActivityForResult(intent, REQUEST_ACCOUNT_PICKER);    
+        //mRequest = new RequestAllStreams();
+        try {
+            Date date1 = new SimpleDateFormat("MM/dd/yy").parse("10/15/10");
+            Date date2 = new SimpleDateFormat("MM/dd/yy").parse("10/15/13");
+    		mRequest = new RequestSelectStreams(date1.getTime(), date2.getTime(), 15);
+          } catch (ParseException e) {
+            e.printStackTrace();
+          }
+
+        Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{"com.google"},         
+        		true, null, null, null, null); startActivityForResult(intent, REQUEST_ACCOUNT_PICKER);    
 	}
     
     @Override
@@ -58,21 +76,21 @@ public class ImageGridActivity extends SpiceBaseActivity {
 	    			if (data != null && data.getExtras() != null) {
 	    				String accountName = data.getExtras().getString(AccountManager.KEY_ACCOUNT_NAME);
 					if (accountName != null) {
-						Toast t = Toast.makeText(ImageGridActivity.this, "Welcome" + accountName, Toast.LENGTH_LONG);
+						Toast t = Toast.makeText(ImageGridActivity.this, "Welcome  " + accountName, Toast.LENGTH_LONG);
 						t.setGravity(Gravity.CENTER, 0, -300);
 			            t.show();
-				        mSpiceManager.execute(mRequest, new ConnexusStreamRequestListener());
 					}
 				}
 				break;
 	    	}
     	}
+        mSpiceManager.execute(mRequest, new ConnexusStreamRequestListener());
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        mSpiceManager.execute(mRequest, new ConnexusStreamRequestListener());
+        //mSpiceManager.execute(mRequest, new ConnexusStreamRequestListener());
     }
 
     private void showResults(ConnexusStream.List streams) {

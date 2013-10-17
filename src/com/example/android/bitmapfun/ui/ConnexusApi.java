@@ -9,6 +9,9 @@ public interface ConnexusApi {
     @GET("/AllStreamsServletAPI")
     ConnexusStream.List allStreams();
     
+    @GET("/AllStreamsServletAPI")
+    ConnexusStream.List selectStreams(@EncodedQuery("startDate") long startDate, @EncodedQuery("endDate") long endDate, @EncodedQuery("maxNumberToReturn") int maxNumberToReturn);
+    
     @GET("/SingleStreamServletAPI")
    ConnexusImage.List singleStream(@EncodedQuery("streamId") long streamId);
     
