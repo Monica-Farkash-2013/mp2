@@ -45,8 +45,8 @@ public class ImageGridActivity extends SpiceBaseActivity {
         super.onCreate(savedInstanceState);
 
         mRequest = new RequestAllStreams();
-        Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{"com.google"},         
-        		true, null, null, null, null); startActivityForResult(intent, REQUEST_ACCOUNT_PICKER);    
+        //Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{"com.google"},         
+        //		true, null, null, null, null); startActivityForResult(intent, REQUEST_ACCOUNT_PICKER);    
 	}
     
     @Override
@@ -72,6 +72,7 @@ public class ImageGridActivity extends SpiceBaseActivity {
     @Override
     public void onStart() {
         super.onStart();
+        mSpiceManager.execute(mRequest, new ConnexusStreamRequestListener());
     }
 
     private void showResults(ConnexusStream.List streams) {

@@ -163,7 +163,9 @@ public class StreamImageGridFragment extends Fragment implements AdapterView.OnI
                                 final int columnWidth =
                                         //(mGridView.getWidth() / numColumns) - mImageThumbSpacing;
                                 		(mGridView.getWidth() / 4) - mImageThumbSpacing;
-                                mAdapter.setNumColumns(numColumns);
+                               
+                                //mAdapter.setNumColumns(numColumns); We hard code the number of columns to 4
+                                mAdapter.setNumColumns(4);
                                 mAdapter.setItemHeight(columnWidth);
                                 if (BuildConfig.DEBUG) {
                                     Log.d(TAG, "onCreateView - numColumns set to " + numColumns);
