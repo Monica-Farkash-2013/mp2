@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2012 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.75"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/hello"
+        android:textStyle="bold"
+        android:textColor="@color/red"   
+        android:textSize="28sp" />
+	
+	<GridView
+	    android:id="@+id/gridView"
+	    style="@style/PhotoGridLayout"
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+	    android:columnWidth="@dimen/image_thumbnail_size"
+	    android:horizontalSpacing="@dimen/image_thumbnail_spacing"
+	    android:numColumns="4"
+	    android:stretchMode="columnWidth"
+	    android:verticalSpacing="@dimen/image_thumbnail_spacing" 
+	    android:gravity="center|bottom"
+        android:layout_weight="6">
+	
+	</GridView>
+	
+
+	<RelativeLayout
+    	android:orientation="horizontal" 
+    	android:layout_height="wrap_content"
+    	android:layout_width="match_parent"
+    	android:layout_weight="0.5">
+
+    	<TextView
+    	    android:id="@+id/editText2"
+    	    android:layout_width="match_parent"
+    	    android:layout_height="wrap_content"
+    	    android:layout_toLeftOf="@+id/getGraph"
+    	    android:gravity="left"
+    	    android:hint="@string/Nearby_pictures"
+    	    android:textStyle="bold"
+        	android:textColor="@color/red"   
+        	android:textSize="28sp" />
+    	
+		<ImageView
+		    android:id="@+id/getGraph"
+		    android:layout_width="40dp"
+		    android:layout_height="40dp"
+		    android:layout_alignParentRight="true"
+		    android:gravity="right"
+		    android:src="@drawable/more" />
+	
+		
+	</RelativeLayout>
+    <Button
+        android:id="@+id/button_streams"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="0.25"
+        android:layout_gravity="bottom|left"
+        android:text="@string/View_all_streams" />
+	
+</LinearLayout>
