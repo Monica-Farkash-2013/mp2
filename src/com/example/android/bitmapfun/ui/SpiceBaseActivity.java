@@ -7,6 +7,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.octo.android.robospice.SpiceManager;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -18,6 +19,7 @@ public class SpiceBaseActivity extends FragmentActivity implements
     //private LocationRequest mLocationRequest;
     // Stores the current instantiation of the location client in this object
     protected LocationClient mLocationClient;
+    protected Location currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +63,15 @@ public class SpiceBaseActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onConnected(Bundle connectionHint) {
+	public void onDisconnected() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onDisconnected() {
-		// TODO Auto-generated method stub
+	public void onConnected(Bundle connectionHint) {
+        // Get the current location
+        currentLocation = mLocationClient.getLastLocation();
 		
 	}
 

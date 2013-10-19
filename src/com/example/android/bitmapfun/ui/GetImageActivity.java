@@ -7,14 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import com.example.android.bitmapfun.R;
-import com.example.android.bitmapfun.provider.Images;
 import com.example.android.bitmapfun.util.*;
 import com.google.gson.Gson;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -23,17 +20,13 @@ import com.octo.android.robospice.request.listener.RequestListener;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.annotation.SuppressLint;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -48,11 +41,9 @@ import android.widget.TextView;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.HttpResponse;
 
-import com.google.common.io.Files;
 import java.net.URLEncoder;
  
 public class GetImageActivity extends SpiceBaseActivity {
@@ -127,6 +118,13 @@ public class GetImageActivity extends SpiceBaseActivity {
 		}
 
     }
+    
+	@Override
+	public void onConnected(Bundle connectionHint) {
+		super.onConnected(connectionHint);
+		
+	}
+
     
     public void uploadImgToStream() {
 		FileInputStream in;

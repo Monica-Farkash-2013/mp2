@@ -60,7 +60,7 @@
     	    android:layout_toLeftOf="@+id/getGraph"
     	    android:gravity="left"
     	    android:hint="@string/Find_streams"
-    	    android:inputType="textMultiLine" />
+    	    android:inputType="text" />
     	
 		<ImageView
 		    android:id="@+id/getGraph"
@@ -80,14 +80,6 @@
         android:layout_height="0dp"
         android:layout_gravity="bottom|left"
         android:text="@string/search" />
-    
-    <Button
-        android:id="@+id/mysubscribed"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        android:layout_gravity="bottom|left"
-        android:text="@string/My_Subscribed_Streams" />
-    
+       
 
 </LinearLayout>

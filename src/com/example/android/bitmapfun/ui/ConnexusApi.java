@@ -15,6 +15,9 @@ public interface ConnexusApi {
     @GET("/SingleStreamServletAPI")
    ConnexusImage.List singleStream(@EncodedQuery("streamId") long streamId);
     
+    @GET("/SingleStreamServletAPI")
+   ConnexusImage.List nearbyImages(@EncodedQuery("latitude") double latitude, @EncodedQuery("longitude") double longitude);
+    
     @Multipart
     @POST("/UploadServletAPI")
     //ConnexusStream.List uploadToStream(@EncodedQuery("streamId") long streamId, @EncodedQuery("image") TypedFile image);

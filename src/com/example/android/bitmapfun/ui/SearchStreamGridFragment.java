@@ -38,7 +38,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -56,8 +55,8 @@ import com.example.android.bitmapfun.util.Utils;
  * cache is retained over configuration changes like orientation change so the images are populated
  * quickly if, for example, the user rotates the device.
  */
-public class ImageGridFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private static final String TAG = "ImageGridFragment";
+public class SearchStreamGridFragment extends Fragment implements AdapterView.OnItemClickListener {
+    private static final String TAG = "SearchStreamGridFragment";
     private static final String IMAGE_CACHE_DIR = "thumbs";
     private static final String STREAM_LIST = "streams";
 
@@ -73,8 +72,8 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
      * @param imageUrl The image url to load
      * @return A new instance of ImageDetailFragment with imageNum extras
      */
-    public static ImageGridFragment newInstance( ConnexusStream.List streams) {
-        final ImageGridFragment f = new ImageGridFragment();
+    public static SearchStreamGridFragment newInstance( ConnexusStream.List streams) {
+        final SearchStreamGridFragment f = new SearchStreamGridFragment();
 
         final Bundle args = new Bundle();
         args.putParcelableArrayList(STREAM_LIST, streams);
@@ -86,7 +85,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     /**
      * Empty constructor as per the Fragment documentation
      */
-    public ImageGridFragment() {
+    public SearchStreamGridFragment() {
     }
     
     @Override
@@ -116,31 +115,27 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.image_grid_fragment, container, false);
-        final GridView mGridView = (GridView) v.findViewById(R.id.gridView);
+        final View v = inflater.inflate(R.layout.search_image_grid_fragment, container, false);
+        final GridView mGridView = (GridView) v.findViewById(R.id.gridViewS);
         mGridView.setAdapter(mAdapter);
         
-        final EditText et = (EditText) v.findViewById(R.id.editText1);
-        
-        Button button = (Button) v.findViewById(R.id.button_search);
+        Button button = (Button) v.findViewById(R.id.button_searchS);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
-            	Intent intent = new Intent(getActivity(), SearchStreamGridActivity.class);
-            	intent.putExtra(SearchStreamGridActivity.STREAM_SEARCH, et.getText().toString());
-                startActivity(intent);
+            	//Intent intent = new Intent(getActivity(), GetImageActivity.class);
+                //startActivity(intent);
            }
         });
         
-        ImageView iv_button = (ImageView) v.findViewById(R.id.getGraph);
-        iv_button.setOnClickListener(new View.OnClickListener() {
+        button = (Button) v.findViewById(R.id.button_streams);
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
-            	Intent intent = new Intent(getActivity(), NearbyImageGridActivity.class);
+            	Intent intent = new Intent(getActivity(), ImageGridActivity.class);
                 startActivity(intent);
            }
         });
-        
         
         
         mGridView.setOnItemClickListener(this);

@@ -39,20 +39,16 @@ import com.example.android.bitmapfun.util.Utils;
  * cache is retained over configuration changes like orientation change so the images are populated
  * quickly if, for example, the user rotates the device.
  */
-public class StreamImageGridFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private static final String TAG = "StreamImageGridFragment";
+public class NearbyImageGridFragment extends Fragment implements AdapterView.OnItemClickListener {
+    private static final String TAG = "NearbyImageGridFragment";
     private static final String IMAGE_CACHE_DIR = "thumbs";
     private static final String STREAM_LIST = "streams";
-    private static final String STREAM_NAME = "stream_name";
-    private static final String STREAM_ID = "stream_id";
 
     private int mImageThumbSize;
     private int mImageThumbSpacing;
     private ImageAdapter mAdapter;
     private ImageFetcher mImageFetcher;
     private  ArrayList<ConnexusImage> streamList;
-    private  long streamId;
-    private String streamName;
 
     /**
      * Factory method to generate a new instance of the fragment given an image number.
@@ -60,22 +56,19 @@ public class StreamImageGridFragment extends Fragment implements AdapterView.OnI
      * @param imageUrl The image url to load
      * @return A new instance of ImageDetailFragment with imageNum extras
      */
-    //public static ImageGridFragment newInstance( ConnexusStream.List streams) {
-    public static StreamImageGridFragment newInstance( ConnexusImage.List streams, long id, String name) {
-        final StreamImageGridFragment f = new StreamImageGridFragment();
+    public static NearbyImageGridFragment newInstance( ConnexusImage.List streams) {
+        final NearbyImageGridFragment f = new NearbyImageGridFragment();
 
         final Bundle args = new Bundle();
         args.putParcelableArrayList(STREAM_LIST, streams);
-        args.putString(STREAM_NAME, name);
-        args.putLong(STREAM_ID, id);
-        f.setArguments(args);
+         f.setArguments(args);
         return f;
     }
    
     /**
      * Empty constructor as per the Fragment documentation
      */
-    public StreamImageGridFragment() {
+    public NearbyImageGridFragment() {
     }
     
     @Override
@@ -85,8 +78,6 @@ public class StreamImageGridFragment extends Fragment implements AdapterView.OnI
         
         Bundle b = getArguments();
         streamList = b.getParcelableArrayList(STREAM_LIST);
-        streamName = b.getString(STREAM_NAME);
-        streamId = b.getLong(STREAM_ID);
 
         mImageThumbSize = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_size);
         mImageThumbSpacing = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
@@ -107,21 +98,11 @@ public class StreamImageGridFragment extends Fragment implements AdapterView.OnI
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View v = inflater.inflate(R.layout.stream_image_grid_fragment, container, false);
+        final View v = inflater.inflate(R.layout.nearby_stream_image_grid_fragment, container, false);
         final GridView mGridView = (GridView) v.findViewById(R.id.gridView);
         mGridView.setAdapter(mAdapter);
 
-        Button button = (Button) v.findViewById(R.id.button_upload);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Do something in response to button click
-            	Intent intent = new Intent(getActivity(), GetImageActivity.class);
-            	intent.putExtra(GetImageActivity.EXTRA_IMAGE_DATA_STREAM_NAME, streamName);
-            	intent.putExtra(GetImageActivity.EXTRA_IMAGE_DATA_STREAM_ID, streamId);
-                startActivity(intent);
-           }
-        });
-        button = (Button) v.findViewById(R.id.button_streams);
+        Button button = (Button) v.findViewById(R.id.button_streams);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
