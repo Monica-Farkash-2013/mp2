@@ -1,6 +1,7 @@
 package com.example.android.bitmapfun.ui;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 import android.os.Parcel;
@@ -14,6 +15,10 @@ public class ConnexusImage   implements Parcelable {
     String comments;
     Date createDate;
     String bkUrl;
+    double latitude;
+    double longitude;
+    double distance;
+    String streamName;
 
     public ConnexusImage(Parcel in) {
     	readFromParcel(in);
@@ -38,6 +43,10 @@ public class ConnexusImage   implements Parcelable {
 			arg0.writeString(comments);	
 			arg0.writeString(createDate.toString());
 			arg0.writeString(bkUrl);
+			arg0.writeDouble(latitude);
+			arg0.writeDouble(longitude);
+			arg0.writeDouble(distance);
+			arg0.writeString(streamName);
 		}
 	}
 
@@ -60,6 +69,19 @@ public class ConnexusImage   implements Parcelable {
 		    this.comments = in.readString();
 		    DateFormat.format(in.readString(), this.createDate);
 		    this.bkUrl = in.readString();
+		    this.latitude = in.readDouble();
+		    this.longitude = in.readDouble();
+		    this.distance = in.readDouble();
+		    this.streamName = in.readString();
 		}
 	}
+	
+    public static class DistanceComparator implements Comparator<ConnexusImage>{
+
+		@Override
+		public int compare(ConnexusImage o1, ConnexusImage o2) {
+			return (o1.distance < o2.distance ) ? -1: (o1.distance > o2.distance) ? 1:0 ;   	
+		}
+    }
+
 }

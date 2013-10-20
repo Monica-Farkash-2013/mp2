@@ -22,8 +22,10 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.bitmapfun.BuildConfig;
@@ -112,6 +114,7 @@ public class NearbyImageGridFragment extends Fragment implements AdapterView.OnI
         });
         
         mGridView.setOnItemClickListener(this);
+        
         mGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int scrollState) {
@@ -284,6 +287,8 @@ public class NearbyImageGridFragment extends Fragment implements AdapterView.OnI
 
         @Override
         public View getView(int position, View convertView, ViewGroup container) {
+            View v;
+        	
             // First check if this is the top row
             if (position < mNumColumns) {
                 if (convertView == null) {
@@ -298,16 +303,41 @@ public class NearbyImageGridFragment extends Fragment implements AdapterView.OnI
             // Now handle the main ImageView thumbnails
             ImageView imageView;
             if (convertView == null) { // if it's not recycled, instantiate and initialize
-                imageView = new RecyclingImageView(mContext);
+            	v = LayoutInflater.from(mContext).inflate(R.layout.connexus_view,null);
+            	//v.setLayoutParams(new GridView.LayoutParams(100,100));
+
+            	FrameLayout f = (FrameLayout)v.findViewById(R.id.frameLayout1);
+            	imageView = new RecyclingImageView(mContext);
+            	imageView = (ImageView)f.findViewById(R.id.imageView1);
+
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setLayoutParams(mImageViewLayoutParams);
+                //imageView.setLayoutParams(mImageViewLayoutParams);
+                v.setLayoutParams(mImageViewLayoutParams);
+                              
+                TextView tView = (TextView) f.findViewById(R.id.textView1);
+                String strName = streamList.get(position - mNumColumns).streamName;
+                tView.setText(strName);
+                tView.setEnabled(true);
+                tView.setVisibility(View.VISIBLE);
+
+                TextView checkedTextView = (TextView) v.findViewById(R.id.textView2);
+                long dist = (long)streamList.get(position - mNumColumns).distance/3;
+                checkedTextView.setText(String.valueOf(dist) +" yds");
+                checkedTextView.setEnabled(true);
+                checkedTextView.setVisibility(View.VISIBLE);
+                
             } else { // Otherwise re-use the converted view
-                imageView = (ImageView) convertView;
+                //imageView = (ImageView) convertView;
+            	v = convertView;
+            	imageView = (ImageView)v.findViewById(R.id.imageView1);
             }
 
             // Check the height matches our calculated column width
-            if (imageView.getLayoutParams().height != mItemHeight) {
-                imageView.setLayoutParams(mImageViewLayoutParams);
+            //if (imageView.getLayoutParams().height != mItemHeight) {
+            //    imageView.setLayoutParams(mImageViewLayoutParams);
+           // }
+            if (v.getLayoutParams().height != mItemHeight) {
+                v.setLayoutParams(mImageViewLayoutParams);
             }
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
@@ -315,7 +345,7 @@ public class NearbyImageGridFragment extends Fragment implements AdapterView.OnI
             //mImageFetcher.loadImage(Images.imageThumbUrls[position - mNumColumns], imageView);
             //mImageFetcher.loadImage(streamList.get(position - mNumColumns).coverImageUrl, imageView);
             mImageFetcher.loadImage(streamList.get(position - mNumColumns).bkUrl, imageView);
-            return imageView;
+            return v;
         }
 
         /**

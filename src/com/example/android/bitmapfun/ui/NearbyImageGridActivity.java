@@ -1,5 +1,7 @@
 package com.example.android.bitmapfun.ui;
 
+import java.util.Collections;
+
 import com.example.android.bitmapfun.BuildConfig;
 import com.example.android.bitmapfun.util.Utils;
 import com.octo.android.robospice.SpiceManager;
@@ -39,6 +41,9 @@ public class NearbyImageGridActivity extends SpiceBaseActivity {
     }
 
     private void showResults(ConnexusImage.List images) {
+
+    	Collections.sort(images, new ConnexusImage.DistanceComparator());
+
     	if (getSupportFragmentManager().findFragmentByTag(TAG) == null) {
             final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(android.R.id.content, NearbyImageGridFragment.newInstance(images), TAG);
