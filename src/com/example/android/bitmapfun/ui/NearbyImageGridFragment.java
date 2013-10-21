@@ -304,9 +304,8 @@ public class NearbyImageGridFragment extends Fragment implements AdapterView.OnI
             ImageView imageView;
             if (convertView == null) { // if it's not recycled, instantiate and initialize
             	v = LayoutInflater.from(mContext).inflate(R.layout.connexus_view,null);
-            	//v.setLayoutParams(new GridView.LayoutParams(100,100));
 
-            	imageView = new RecyclingImageView(mContext);
+            	//imageView = new RecyclingImageView(mContext);
             	imageView = (ImageView)v.findViewById(R.id.imageView1);
 
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

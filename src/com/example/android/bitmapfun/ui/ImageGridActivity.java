@@ -43,8 +43,8 @@ import android.widget.Toast;
  */
 public class ImageGridActivity extends SpiceBaseActivity {
     private static final String TAG = "ImageGridActivity";
-    //private RequestAllStreams mRequest;
-    private RequestSelectStreams mRequest;
+    private RequestAllStreams mRequest;
+    //private RequestSelectStreams mRequest;
     static final int REQUEST_ACCOUNT_PICKER = 2;
     
     @Override
@@ -54,11 +54,11 @@ public class ImageGridActivity extends SpiceBaseActivity {
         }
         super.onCreate(savedInstanceState);
 
-        //mRequest = new RequestAllStreams();
+        mRequest = new RequestAllStreams();
         try {
             Date date1 = new SimpleDateFormat("MM/dd/yy").parse("10/15/10");
-            Date date2 = new SimpleDateFormat("MM/dd/yy").parse("10/15/13");
-    		mRequest = new RequestSelectStreams(date1.getTime(), date2.getTime(), 15);
+            Date date2 = new SimpleDateFormat("MM/dd/yy").parse("10/21/13");
+    		//mRequest = new RequestSelectStreams(date1.getTime(), date2.getTime(), 15);
           } catch (ParseException e) {
             e.printStackTrace();
           }

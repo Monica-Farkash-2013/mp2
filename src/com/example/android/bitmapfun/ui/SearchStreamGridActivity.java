@@ -45,8 +45,8 @@ import android.widget.Toast;
  */
 public class SearchStreamGridActivity extends SpiceBaseActivity {
     private static final String TAG = "SearchStreamGridActivity";
-    //private RequestAllStreams mRequest;
-    private RequestSelectStreams mRequest;
+    private RequestAllStreams mRequest;
+    //private RequestSelectStreams mRequest;
     public static final String STREAM_SEARCH = "search";
     private String searchCriteria;
     
@@ -59,11 +59,12 @@ public class SearchStreamGridActivity extends SpiceBaseActivity {
 
         Intent i = getIntent();
         searchCriteria = i.getStringExtra(STREAM_SEARCH);
-        
+		mRequest = new RequestAllStreams();
+
         try {
             Date date1 = new SimpleDateFormat("MM/dd/yy").parse("10/15/10");
             Date date2 = new SimpleDateFormat("MM/dd/yy").parse("10/15/13");
-    		mRequest = new RequestSelectStreams(date1.getTime(), date2.getTime(), 15);
+    		//mRequest = new RequestSelectStreams(date1.getTime(), date2.getTime(), 15);
           } catch (ParseException e) {
             e.printStackTrace();
           }
@@ -83,7 +84,7 @@ public class SearchStreamGridActivity extends SpiceBaseActivity {
      		//Collections.sort(streams);
      		int i = 0;
      		for (ConnexusStream s : streams ) {
-     			if (s.name.contains(searchCriteria)) {
+     			if (s.name.contains(searchCriteria) || s.tags.contains(searchCriteria)) {
      	    		selectedStreams.add(s);    			
      			} 
      		} 

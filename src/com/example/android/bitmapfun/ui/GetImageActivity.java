@@ -73,7 +73,7 @@ public class GetImageActivity extends SpiceBaseActivity {
         streamId = i.getLongExtra(EXTRA_IMAGE_DATA_STREAM_ID, 0);
         
         TextView text = (TextView)findViewById(R.id.textView2);
-        text.setText(streamName);
+        text.setText("Stream Name: " + streamName);
         EditText edittext = (EditText)findViewById(R.id.editText1);
         message = edittext.getText().toString();
         

@@ -41,6 +41,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.bitmapfun.BuildConfig;
@@ -342,24 +343,49 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 
             // Now handle the main ImageView thumbnails
             ImageView imageView;
+            View v;
+
             if (convertView == null) { // if it's not recycled, instantiate and initialize
-                imageView = new RecyclingImageView(mContext);
+            	v = LayoutInflater.from(mContext).inflate(R.layout.connexus_view,null);
+            	imageView = (ImageView)v.findViewById(R.id.imageView1);
+            	v.setLayoutParams(mImageViewLayoutParams);
+            	
+                TextView tView = (TextView) v.findViewById(R.id.textView1);
+                String strName = streamList.get(position - mNumColumns).name;
+                tView.setText(strName);
+                tView.setEnabled(true);
+                tView.setVisibility(View.VISIBLE);
+
+                TextView checkedTextView = (TextView) v.findViewById(R.id.textView2);
+                //long dist = (long)streamList.get(position - mNumColumns).distance/3;
+                //checkedTextView.setText(String.valueOf(dist) +" yds");
+                checkedTextView.setEnabled(false);
+                checkedTextView.setVisibility(View.INVISIBLE);
+            	
+            	
+            	//imageView = new RecyclingImageView(mContext);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setLayoutParams(mImageViewLayoutParams);
+                //imageView.setLayoutParams(mImageViewLayoutParams);
             } else { // Otherwise re-use the converted view
-                imageView = (ImageView) convertView;
+                //imageView = (ImageView) convertView;
+            	v = convertView;
+            	imageView = (ImageView)v.findViewById(R.id.imageView1);
             }
 
             // Check the height matches our calculated column width
-            if (imageView.getLayoutParams().height != mItemHeight) {
-                imageView.setLayoutParams(mImageViewLayoutParams);
+            //if (imageView.getLayoutParams().height != mItemHeight) {
+            //    imageView.setLayoutParams(mImageViewLayoutParams);
+           // }
+            if (v.getLayoutParams().height != mItemHeight) {
+                v.setLayoutParams(mImageViewLayoutParams);
             }
 
             // Finally load the image asynchronously into the ImageView, this also takes care of
             // setting a placeholder image while the background thread runs 
             //mImageFetcher.loadImage(Images.imageThumbUrls[position - mNumColumns], imageView);
             mImageFetcher.loadImage(streamList.get(position - mNumColumns).coverImageUrl, imageView);
-            return imageView;
+            //return imageView;
+            return v;
         }
 
         /**
