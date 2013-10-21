@@ -58,7 +58,9 @@ public class ConnexusStream   implements Parcelable {
 			this.id = in.readLong();
 		    this.name = in.readString();
 		    this.tags = in.readString();
-		    DateFormat.format(in.readString(), this.createDate);
+		    String tempDate = in.readString();
+		    if (tempDate != null)
+		    	DateFormat.format(tempDate, this.createDate);
 		    this.coverImageUrl = in.readString();
 		}
 	}

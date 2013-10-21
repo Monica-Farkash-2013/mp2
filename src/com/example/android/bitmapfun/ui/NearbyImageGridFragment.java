@@ -150,7 +150,7 @@ public class NearbyImageGridFragment extends Fragment implements AdapterView.OnI
                                
                                 //mAdapter.setNumColumns(numColumns); We hard code the number of columns to 4
                                 mAdapter.setNumColumns(4);
-                                mAdapter.setItemHeight(columnWidth);
+                                mAdapter.setItemHeight(columnWidth+10);
                                 if (BuildConfig.DEBUG) {
                                     Log.d(TAG, "onCreateView - numColumns set to " + numColumns);
                                 }
@@ -306,15 +306,14 @@ public class NearbyImageGridFragment extends Fragment implements AdapterView.OnI
             	v = LayoutInflater.from(mContext).inflate(R.layout.connexus_view,null);
             	//v.setLayoutParams(new GridView.LayoutParams(100,100));
 
-            	FrameLayout f = (FrameLayout)v.findViewById(R.id.frameLayout1);
             	imageView = new RecyclingImageView(mContext);
-            	imageView = (ImageView)f.findViewById(R.id.imageView1);
+            	imageView = (ImageView)v.findViewById(R.id.imageView1);
 
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 //imageView.setLayoutParams(mImageViewLayoutParams);
                 v.setLayoutParams(mImageViewLayoutParams);
                               
-                TextView tView = (TextView) f.findViewById(R.id.textView1);
+                TextView tView = (TextView) v.findViewById(R.id.textView1);
                 String strName = streamList.get(position - mNumColumns).streamName;
                 tView.setText(strName);
                 tView.setEnabled(true);

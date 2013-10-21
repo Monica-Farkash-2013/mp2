@@ -33,7 +33,16 @@
         android:textColor="@color/red"   
         android:textSize="28sp" />
 	
-	<GridView
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.45"
+        android:gravity="center_vertical|center_horizontal"
+        android:textStyle="bold"
+        android:textSize="18sp" />
+	
+    	<GridView
 	    android:id="@+id/gridView"
 	    style="@style/PhotoGridLayout"
 	    android:layout_width="fill_parent"
@@ -50,10 +59,10 @@
 	
     <ImageView
         android:id="@+id/ImageView05"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_weight="0.25"
-        android:src="@drawable/morepictures" />
+        android:layout_width="140dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:src="@drawable/more" />
     
     <Button
         android:id="@+id/button_upload"

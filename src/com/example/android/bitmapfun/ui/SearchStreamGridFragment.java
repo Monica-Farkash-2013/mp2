@@ -38,8 +38,10 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.bitmapfun.BuildConfig;
@@ -58,13 +60,15 @@ import com.example.android.bitmapfun.util.Utils;
 public class SearchStreamGridFragment extends Fragment implements AdapterView.OnItemClickListener {
     private static final String TAG = "SearchStreamGridFragment";
     private static final String IMAGE_CACHE_DIR = "thumbs";
-    private static final String STREAM_LIST = "streams";
-
+    private static final String SEARCH_CRITERIA = "search_criteria";
+    private static final String STREAM_LIST = "stream_list";
+    
     private int mImageThumbSize;
     private int mImageThumbSpacing;
     private ImageAdapter mAdapter;
     private ImageFetcher mImageFetcher;
     private  ArrayList<ConnexusStream> streamList;
+    private String searchCriteria;
 
     /**
      * Factory method to generate a new instance of the fragment given an image number.
@@ -72,13 +76,14 @@ public class SearchStreamGridFragment extends Fragment implements AdapterView.On
      * @param imageUrl The image url to load
      * @return A new instance of ImageDetailFragment with imageNum extras
      */
-    public static SearchStreamGridFragment newInstance( ConnexusStream.List streams) {
+    public static SearchStreamGridFragment newInstance( ConnexusStream.List streams, String searchCriteria) {
         final SearchStreamGridFragment f = new SearchStreamGridFragment();
 
         final Bundle args = new Bundle();
         args.putParcelableArrayList(STREAM_LIST, streams);
         f.setArguments(args);
-        
+        args.putString(SEARCH_CRITERIA, searchCriteria);
+       
         return f;
     }
    
@@ -95,6 +100,7 @@ public class SearchStreamGridFragment extends Fragment implements AdapterView.On
         
         Bundle b = getArguments();
         streamList = b.getParcelableArrayList(STREAM_LIST);
+        searchCriteria = b.getString(SEARCH_CRITERIA);
 
         mImageThumbSize = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_size);
         mImageThumbSpacing = getResources().getDimensionPixelSize(R.dimen.image_thumbnail_spacing);
@@ -119,12 +125,20 @@ public class SearchStreamGridFragment extends Fragment implements AdapterView.On
         final GridView mGridView = (GridView) v.findViewById(R.id.gridViewS);
         mGridView.setAdapter(mAdapter);
         
+        final EditText editText = (EditText) v.findViewById(R.id.editText1);
+        editText.setText(searchCriteria);
+
+        TextView streamText = (TextView) v.findViewById(R.id.textView1);
+        streamText.setText(String.valueOf(streamList.size()) +  " results for: " + searchCriteria + ", click on an image to view stream...");
+
         Button button = (Button) v.findViewById(R.id.button_searchS);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
-            	//Intent intent = new Intent(getActivity(), GetImageActivity.class);
-                //startActivity(intent);
+            	String newSearchCriteria = editText.getText().toString();
+            	Intent intent = new Intent(getActivity(), SearchStreamGridActivity.class);
+            	intent.putExtra(SearchStreamGridActivity.STREAM_SEARCH, newSearchCriteria);
+                startActivity(intent);
            }
         });
         

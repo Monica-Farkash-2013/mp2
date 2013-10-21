@@ -24,6 +24,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.bitmapfun.BuildConfig;
@@ -111,6 +112,9 @@ public class StreamImageGridFragment extends Fragment implements AdapterView.OnI
         final GridView mGridView = (GridView) v.findViewById(R.id.gridView);
         mGridView.setAdapter(mAdapter);
 
+        TextView streamText = (TextView) v.findViewById(R.id.textView2);
+        streamText.setText("Selected Stream Name: " + streamName);
+        
         Button button = (Button) v.findViewById(R.id.button_upload);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

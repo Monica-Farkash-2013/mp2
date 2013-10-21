@@ -1,6 +1,8 @@
 package com.example.android.bitmapfun.ui;
 
 import java.util.Collections;
+import java.util.SortedMap;
+import java.util.TreeSet;
 
 import com.example.android.bitmapfun.BuildConfig;
 import com.example.android.bitmapfun.util.Utils;
@@ -41,7 +43,9 @@ public class NearbyImageGridActivity extends SpiceBaseActivity {
     }
 
     private void showResults(ConnexusImage.List images) {
-
+    	
+    	
+    	//TreeSet
     	Collections.sort(images, new ConnexusImage.DistanceComparator());
 
     	if (getSupportFragmentManager().findFragmentByTag(TAG) == null) {

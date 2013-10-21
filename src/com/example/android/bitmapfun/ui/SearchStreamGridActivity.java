@@ -94,7 +94,7 @@ public class SearchStreamGridActivity extends SpiceBaseActivity {
     	
         if (getSupportFragmentManager().findFragmentByTag(TAG) == null) {
             final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(android.R.id.content, SearchStreamGridFragment.newInstance((ConnexusStream.List)selectedStreams), TAG);
+            ft.add(android.R.id.content, SearchStreamGridFragment.newInstance((ConnexusStream.List)selectedStreams, searchCriteria), TAG);
             ft.commit();
         }
     }
